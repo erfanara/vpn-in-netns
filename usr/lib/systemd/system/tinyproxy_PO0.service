@@ -1,0 +1,19 @@
+[Unit]
+Description=Tinyproxy Web Proxy Server for ovpn0
+After=network.target ovpn0.service
+Wants=network-online.target ovpn0.service
+
+[Service]
+User=root
+Type=simple
+ExecStart=ip netns exec ovpn0 /usr/bin/tinyproxy -d -c /etc/tinyproxy/tinyproxy_PO0.conf &>/dev/null
+#PIDFile=/run/tinyproxy/tinyproxy.pid
+PrivateDevices=yes
+PrivateTmp=yes
+NoNewPrivileges=yes
+ProtectSystem=full
+ProtectHome=yes
+DynamicUser=yes
+
+[Install]
+WantedBy=multi-user.target

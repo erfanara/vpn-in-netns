@@ -1,0 +1,19 @@
+[Unit]
+Description=a new network NameSpace for openvpn
+After=network.target
+Wants=network.target
+
+[Service]
+User=root
+Type=oneshot
+ExecStart=/usr/bin/PO0_start.sh
+RemainAfterExit=false
+ExecStop= ;
+#PrivateTmp=yes
+#NoNewPrivileges=yes
+#ProtectSystem=full
+#ProtectHome=yes
+#DynamicUser=yes
+
+[Install]
+WantedBy=multi-user.target

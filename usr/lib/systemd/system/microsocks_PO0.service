@@ -1,0 +1,18 @@
+[Unit]
+Description=MICROSOCKS in ovpn0 network namespace
+After=network.target ovpn0.service
+Wants=network-online.target ovpn0.service
+
+[Service]
+User=root
+Type=simple
+ExecStart=ip netns exec ovpn0 microsocks -i 10.200.200.2 -p 1080 &>/dev/null
+PrivateTmp=yes
+NoNewPrivileges=yes
+ProtectSystem=full
+ProtectHome=yes
+DynamicUser=yes
+
+[Install]
+WantedBy=multi-user.target
+
